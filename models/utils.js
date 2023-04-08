@@ -369,7 +369,7 @@ async function buildHTMLDocument(arr, name) {
             refreshTasks()
           };
           
-          refreshBtn.addEventListener('click', () => window.location.reload())
+          refreshBtn.addEventListener('click', refreshTasks)
 
           function handleHiddenTasks() {
             const items = document.querySelectorAll('.flex-item')
@@ -384,16 +384,19 @@ async function buildHTMLDocument(arr, name) {
           }
           handleHiddenTasks()
 
-          const checkboxInputs = document.querySelectorAll('input[type="checkbox"]')
+          const checkboxInputs = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+          checkboxInputs.forEach(box => {
+            box.addEventListener('change', handleFilter)
+          })
 
-          checkboxInputs.forEach(box => box.addEventListener('change', e => {
+          function handleFilter(e) {
             const value = e.target.name
             if (e.target.checked) {
               document.querySelectorAll('article.flex-item.' + value).forEach(el => el.style.display = 'unset')
             } else {
               document.querySelectorAll('article.flex-item.' + value).forEach(el => el.style.display = 'none')
             }
-          }))
+          }
         
         </script>
       </body>
