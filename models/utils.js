@@ -185,6 +185,7 @@ async function buildHTMLDocument(arr, name) {
                         inset -8px -8px 12px rgb(255 255 255 / 0.5),
                         inset 8px 8px 12px rgb(70 70 70 / 0.15);
           }
+          article.flex-item.wh { display: none; }
           
           .summary {
             box-shadow: 0 6px 6px rgb(0 0 0 / 0.4);
@@ -262,12 +263,13 @@ async function buildHTMLDocument(arr, name) {
             font-size: 1.25rem;
           }
           
-          button#refresh {
+          #settings {
             position:  absolute;
             top:  0.5rem;
             right:  0.5rem;
+          }
+          button#refresh {
             padding:  1.5rem 2.5rem;
-            float:  right;
             border-radius: 60px;
             overflow: hidden;
             cursor:  pointer;
@@ -275,7 +277,10 @@ async function buildHTMLDocument(arr, name) {
                         10px 10px 15px rgb(70 70 70 / 0.15),
                         inset -8px -8px 12px rgb(255 255 255 / 0.5),
                         inset 8px 8px 12px rgb(70 70 70 / 0.15);
-          }       
+          }
+          #settings label {
+            margin-right: 1rem;
+          }   
           
           #loader {
             width: 40px;
@@ -298,7 +303,15 @@ async function buildHTMLDocument(arr, name) {
       </head>
       <body>
         <div id="task-wrapper">
-          <button id="refresh">Refresh</button>
+          <div id="settings">
+            <label for="wc">
+              <input type="checkbox" name="wc" id="wc" checked /> Show WCs?
+            </label>
+            <label for="wh">
+              <input type="checkbox" name="wh" id="wh" /> Show WHs?
+            </label>
+            <button id="refresh">Refresh</button>
+          </div>
           ${taskHTML}
         </div>
         <script type="text/javascript">
@@ -357,6 +370,30 @@ async function buildHTMLDocument(arr, name) {
           };
           
           refreshBtn.addEventListener('click', () => window.location.reload())
+
+          function handleHiddenTasks() {
+            const items = document.querySelectorAll('.flex-item')
+
+            items.forEach(item => {
+              if (item.querySelector('.task-name')?.textContent.includes('WC') && !item.querySelector('.task-name')?.textContent.includes('WH')) {
+                  item.classList.add('wc')
+              } else {
+                  item.classList.add('wh')
+              }
+            })
+          }
+          handleHiddenTasks()
+
+          const checkboxInputs = document.querySelectorAll('input[type="checkbox"]')
+
+          checkboxInputs.forEach(box => box.addEventListener('change', e => {
+            const value = e.target.name
+            if (e.target.checked) {
+              document.querySelectorAll('article.flex-item.' + value).forEach(el => el.style.display = 'unset')
+            } else {
+              document.querySelectorAll('article.flex-item.' + value).forEach(el => el.style.display = 'none')
+            }
+          }))
         
         </script>
       </body>
