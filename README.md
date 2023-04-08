@@ -11,6 +11,11 @@ navigate to:
 If you have trouble with port conflicts just add a .env with a `PORT` environment variable equal to whatever port you want to use:
     PORT=1234
 
+## Chromedriver
+A chromedriver is needed to run the headless browser, which can be downloaded from the following link: [https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads)
+
+This chromedriver, when downloaded and unzipped, must be placed somewhere where you $PATH environment variable can find it. The natural place is `/usr/bin/`.
+
 tip: for easy access you can alias in your .rc file to start the server up with a command
 
 tech: Node.JS, Puppeteer
