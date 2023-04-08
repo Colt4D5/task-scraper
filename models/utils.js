@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer')
 
 async function scrape(url, name = 'My', username, password) {
+  console.log('Launching headless browser...')
   // use the non-headless function if you want to see the magic happen
   // const browser = await puppeteer.launch({headless: false});
   const browser = await puppeteer.launch();
@@ -18,6 +19,8 @@ async function scrape(url, name = 'My', username, password) {
     page.waitForNavigation('[name="Password"]'),
   ]);
   
+  console.log('Logging in...')
+
   await page.waitForSelector('[name="UserID"]')
   await page.type('[name="UserID"]', username, {delay: 50})
 
@@ -30,12 +33,17 @@ async function scrape(url, name = 'My', username, password) {
     page.click('[data-action="submit:login"]'),
   ]);
 
+  console.log('Fetching tasks...')
+
   await page.waitForSelector('listview#lstMyTasks h2')
 
   const dates = await page.$$('listview#lstMyTasks > li')
 
   let index = 0
   let taskArr = []
+
+  console.log('Writing tasks...')
+
   for (date of dates) {
     const title = await page.evaluate(el => el.querySelector('h2').textContent, date)
     taskArr.push({ date: title, tasks: [] })
@@ -77,11 +85,14 @@ async function scrape(url, name = 'My', username, password) {
     // console.log(index)
     index++
 
+    console.log(`Found ${tasks.length} tasks for date ${index} of ${dates.length}`)
+
   }
   // console.log(taskArr)
-
+  console.log('Building html...')
   const html = await buildHTMLDocument(taskArr, name)
   await browser.close();
+  console.log('Done!')
   return html
 }
 
