@@ -168,10 +168,15 @@ async function buildHTMLDocument(arr, name) {
             flex-direction: row;
             justify-content: flex-start;
             align-items: flex-start;
-            padding: 0 3rem;
+            padding: 0 0.5rem;
             flex-wrap: wrap;
             gap: 12px;
             margin: 2rem 0;
+          }
+          @media (min-width: 40em) {
+            .flex {
+              padding: 0 3rem;
+            }
           }
           .date-header {
             background-color: var(--clr-primary);
@@ -183,11 +188,19 @@ async function buildHTMLDocument(arr, name) {
           }
           
           .date-header > h1 {
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            text-align: center;
             color: var(--text-header);
+          }
+          @media (min-width: 40em) {
+            .date-header > h1 {
+              text-align: left;
+            }
           }
           
           article.flex-item {
-            width: 45%;
+            width: 100%;
+            margin-inline: auto;
             margin: 1rem;
             border-radius: 60px;
             overflow: hidden;
@@ -195,6 +208,12 @@ async function buildHTMLDocument(arr, name) {
                         10px 10px 15px rgb(70 70 70 / 0.15),
                         inset -8px -8px 12px rgb(255 255 255 / 0.5),
                         inset 8px 8px 12px rgb(70 70 70 / 0.15);
+          }
+          @media (min-width: 40em) {
+            article.flex-item {
+              width: 45%;
+              margin-inline: 1rem;
+            }
           }
           article.flex-item.wh { display: none; }
           
@@ -218,8 +237,8 @@ async function buildHTMLDocument(arr, name) {
           }
           
           .checkbox {
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             background-color: #dddddd;
             border-radius: 50%;
             box-shadow: -5px -5px 6px rgb(255 255 255 / 0.3),
@@ -227,6 +246,12 @@ async function buildHTMLDocument(arr, name) {
                         inset -5px -5px 6px rgb(255 255 255 / 0.3),
                         inset 5px 5px 6px rgb(70 70 70 / 0.1);
             transition: background-color 0.3s ease;
+          }
+          @media (min-width: 40em) {
+            .checkbox {
+              width: 30px;
+              height: 30px;
+            }
           }
           
           .checkbox.active {
@@ -246,7 +271,7 @@ async function buildHTMLDocument(arr, name) {
           }
           
           .time-div > p {
-            font-size: 2rem;
+            font-size: clamp(1rem, 3vw, 2rem);
             font-weight: 500;
           }
           
@@ -257,37 +282,61 @@ async function buildHTMLDocument(arr, name) {
           }
           
           .content_inner {
-            background-color: rgb(255 255 255 0.2);
-            padding: 2rem;
-            font-size: 1.25rem;
+            background-color: rgb(255 255 255 / 0.2);
+            padding: 2rem 1.25rem 2.5rem;
+            font-size: clamp(1.1rem, 4vw, 2rem);
             box-shadow: inset -6px -6px 12px rgb(255 255 255 / 0.5),
                         inset 6px 6px 12px rgb(70 70 70 / 0.15);
-          
           }
           
           .task-title {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 3vw, 1.5rem);
             font-weight: bold;
           }
           
           .task-name {
-            font-size: 1.25rem;
+            font-size: clamp(0.9rem, 3vw, 1.25rem);
           }
           
           #settings {
-            position:  absolute;
-            top:  0.5rem;
-            right:  0.5rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ddd;
+            text-align: center;
+            padding-block: 1rem;
+            box-shadow: 0 -8px 8px rgb(0 0 0 / 0.15);
+          }
+          @media (min-width: 40em) {
+            #settings {
+              position:  absolute;
+              top:  0.5rem;
+              bottom: auto;
+              right:  0.5rem;
+              left: auto;
+              width: auto;
+              padding: 0;
+              background-color: transparent;
+              text-align: unset;
+              box-shadow: none;
+            }
           }
           button#refresh {
-            padding:  1.5rem 2.5rem;
-            border-radius: 60px;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
             overflow: hidden;
             cursor:  pointer;
-            box-shadow: -15px -15px 20px rgb(255 255 255 / 0.75),
-                        10px 10px 15px rgb(70 70 70 / 0.15),
-                        inset -8px -8px 12px rgb(255 255 255 / 0.5),
-                        inset 8px 8px 12px rgb(70 70 70 / 0.15);
+          }
+          @media (min-width: 40em) {
+            button#refresh {
+              padding:  1.5rem 2.5rem;
+              border-radius: 60px;
+              box-shadow: -15px -15px 20px rgb(255 255 255 / 0.75),
+                          10px 10px 15px rgb(70 70 70 / 0.15),
+                          inset -8px -8px 12px rgb(255 255 255 / 0.5),
+                          inset 8px 8px 12px rgb(70 70 70 / 0.15);
+            }
           }
           #settings label {
             margin-right: 1rem;
