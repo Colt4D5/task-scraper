@@ -118,6 +118,16 @@ async function buildHTMLDocument(arr, name) {
               </div>
               <div class="content">
                 <div class="content_inner">
+                  ${task.subtitle}<br>
+                  <br>
+                  <br>
+                  <br>
+                  Thanks!<br>
+                  <br>
+                  - Colton<br>
+                  <br>
+                  _________________________<br>
+                  <br>
                   ${task.details}
                 </div>
               </div>
@@ -284,7 +294,7 @@ async function buildHTMLDocument(arr, name) {
           .content_inner {
             background-color: rgb(255 255 255 / 0.2);
             padding: 2rem 1.25rem 2.5rem;
-            font-size: clamp(1.1rem, 4vw, 2rem);
+            font-size: clamp(1rem, 4vw, 1.4rem);
             box-shadow: inset -6px -6px 12px rgb(255 255 255 / 0.5),
                         inset 6px 6px 12px rgb(70 70 70 / 0.15);
           }
