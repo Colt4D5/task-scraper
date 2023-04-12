@@ -124,8 +124,7 @@ async function buildHTMLDocument(arr, name) {
                   <br>
                   Thanks!<br>
                   <br>
-                  - Colton<br>
-                  <br>
+                  ${name ? '-' + name + '<br><br>' : ''}
                   _________________________<br>
                   <br>
                   ${task.details}
