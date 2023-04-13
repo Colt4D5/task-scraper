@@ -78,7 +78,13 @@ async function scrape(url, name = 'My', username, password) {
         details: taskDetails
       }
 
-      taskArr[index].tasks.push(taskObj)
+      if (taskObj.subtitle.includes('Scrum Meeting')) {
+        console.log('Filtered Scrum...')
+      } else if (taskObj.subtitle.includes('Image Audit Tech Support')) {
+        console.log('Filtered image audit support...')
+      } else {
+        taskArr[index].tasks.push(taskObj)
+      }
       // console.log(taskTitle)
       
     }
